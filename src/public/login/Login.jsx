@@ -42,7 +42,7 @@ const Login = () => {
                     <div className="w-full h-screen justify-center bg-white dark:bg-black bg-opacity-80 dark:bg-opacity-80">   
                         <div className='md:h-screen flex items-center py-4 px-4 md:px-16'> 
                             <div className='w-full py-0 grid md:flex md:justify-around md:items-center'>                          
-                                <div className='w-full flex flex-col gap-4 md:w-[50%]'>        
+                                <div className='w-full flex flex-col gap-4 md:w-[48%] mt-12 md:mt-0'>        
                                     <Logo />
                                     <div className='md:my-2 md:min-h-48'>
                                         <span 

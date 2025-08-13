@@ -11,7 +11,6 @@ import { acknowledgeDispatch } from '../../../apis/dispatchActions';
 const IncomingDispatches = ({ dispatches }) => {
 
     const { user, token, refreshRecord } = useContext(AppContext);
-    const [showIncoming, setShowIncoming] = useState(false);
     const [error, setError] = useState();
     const [acknowledging, setAcknowledging] = useState(false);
     const [success, setSuccess] = useState();
@@ -124,8 +123,7 @@ const IncomingDispatches = ({ dispatches }) => {
     return (
         <div className='w-full'>
             <div 
-                className='w-full p-4 flex justify-between items-center shadow-md cursor-pointer'
-                onClick={() => setShowIncoming(!showIncoming)}
+                className='w-full px-4 py-2 flex justify-between items-center shadow-md'
             >
                 <div className='flex space-x-3'>
                     <span className='text-lg font-extralight'>Incoming dispatches</span>
@@ -137,12 +135,9 @@ const IncomingDispatches = ({ dispatches }) => {
                         </div>
                 }
                 </div>
-            {
-                showIncoming ? <RiArrowDropUpLine size={30} /> : <RiArrowDropDownLine size={30} /> 
-            }
 
             </div>
-            <div className={`${showIncoming ? 'block' : 'hidden'} p-4`}>
+            <div className={`w-full py-4 overflow-x-scroll`}>
             {
                 dispatches && dispatches.length > 0 ? 
                 <RecordsTable columns={columns} data={dispatches} /> :

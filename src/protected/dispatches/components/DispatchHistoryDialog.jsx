@@ -20,7 +20,7 @@ const DispatchHistoryDialog = ({ tool_id, batch_no, created_at, itemname, setHis
                 filterable: true,
                 sortable: true,
                 cell: (row) => (
-                    <div className='grid py-2 space-y-1'>
+                    <div className='grid py-2 space-y-1 text-gray-600 dark:text-gray-400'>
                         <span className='text-sm'>
                         { row?.source_type === 'APIN' && 'APIN HQ Warehouse' }
                         { row?.source_type === 'state' && row?.source_state+' '+row?.source_type }
@@ -37,7 +37,7 @@ const DispatchHistoryDialog = ({ tool_id, batch_no, created_at, itemname, setHis
                 filterable: true,
                 sortable: true,
                 cell: (row) => (
-                    <div className='grid py-2 space-y-1'>
+                    <div className='grid py-2 space-y-1 text-gray-600 dark:text-gray-400'>
                         <span className='text-sm'>
                         { row?.destination_type === 'state' && row?.destination_state+' '+row?.destination_type }
                         { row?.destination_type === 'lga' && row?.destination_lga+' '+row?.destination_type }
@@ -53,7 +53,7 @@ const DispatchHistoryDialog = ({ tool_id, batch_no, created_at, itemname, setHis
                 filterable: true,
                 sortable: true,
                 cell: (row) => (
-                    <div className='grid py-2 space-y-1'>
+                    <div className='grid py-2 space-y-1 text-gray-600 dark:text-gray-400'>
                         <span className='capitalize text-sm'>{row?.dispatcher_name}</span>
                         <span className='text-xs'>{row?.dispatcher_email}</span>
                     </div>
@@ -65,7 +65,7 @@ const DispatchHistoryDialog = ({ tool_id, batch_no, created_at, itemname, setHis
                 filterable: true,
                 sortable: true,
                 cell: (row) => (
-                    <div className='grid py-2 space-y-1'>
+                    <div className='grid py-2 space-y-1 text-gray-600 dark:text-gray-400'>
                         <span className='capitalize text-sm'>{row?.receiver_name}</span>
                         <span className='text-xs'>{row?.receiver_email}</span>
                     </div>
@@ -77,7 +77,7 @@ const DispatchHistoryDialog = ({ tool_id, batch_no, created_at, itemname, setHis
                 filterable: true,
                 sortable: true,
                 cell: (row) => (
-                    <div className='grid py-2 space-y-1'>
+                    <div className='grid py-2 space-y-1 text-gray-600 dark:text-gray-400'>
                         <span className='text-sm'>{row?.quantity} {row?.packtype} {row?.itemname}</span>
                         <span className='text-sm'>{row?.unit_quantity} pcs</span>
                     </div>

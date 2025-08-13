@@ -10,7 +10,6 @@ import { AppContext } from '../../../context/AppContext';
 const OutgoingDispatches = ({ dispatches }) => {
 
     const { user } = useContext(AppContext);
-    const [showOutgoing, setShowOutgoing] = useState(false);
 
     console.log(dispatches);
 
@@ -21,7 +20,7 @@ const OutgoingDispatches = ({ dispatches }) => {
             filterable: true,
             sortable: true,
             cell: (row) => (
-                <div className='grid py-2 space-y-1'>
+                <div className='grid py-2 space-y-1 text-gray-600 dark:text-gray-400'>
                     <span className='text-sm'>
                     { row?.destination_type === 'state' && row?.destination_state+' '+row?.destination_type }
                     { row?.destination_type === 'lga' && row?.destination_lga+' '+row?.destination_type }
@@ -37,7 +36,7 @@ const OutgoingDispatches = ({ dispatches }) => {
             filterable: true,
             sortable: true,
             cell: (row) => (
-                <div className='grid py-2 space-y-1'>
+                <div className='grid py-2 space-y-1 text-gray-600 dark:text-gray-400'>
                     <span className='capitalize text-sm'>{user && JSON.parse(user)?.name === row?.dispatcher_name ? 'me' : row?.dispatcher_name}</span>
                     <span className='text-xs'>{row?.dispatcher_email}</span>
                 </div>
@@ -49,7 +48,7 @@ const OutgoingDispatches = ({ dispatches }) => {
             filterable: true,
             sortable: true,
             cell: (row) => (
-                <div className='grid py-2 space-y-1'>
+                <div className='grid py-2 space-y-1 text-gray-600 dark:text-gray-400'>
                     <span className='capitalize text-sm'>{user && JSON.parse(user)?.name === row?.receiver_name ? 'me' : row?.receiver_name}</span>
                     <span className='text-xs'>{row?.receiver_email}</span>
                 </div>
@@ -61,7 +60,7 @@ const OutgoingDispatches = ({ dispatches }) => {
             filterable: true,
             sortable: true,
             cell: (row) => (
-                <div className='grid py-2 space-y-1'>
+                <div className='grid py-2 space-y-1 text-gray-600 dark:text-gray-400'>
                     <span className='text-sm'>{row?.quantity} {row?.packtype} {row?.itemname}</span>
                     <span className='text-sm'>{row?.unit_quantity} pcs</span>
                 </div>
@@ -76,7 +75,7 @@ const OutgoingDispatches = ({ dispatches }) => {
             cell: (row) => (
                 row?.received_date ?
                     <div className='grid py-2 space-y-1'>
-                        <span className='text-sm'>{formatDate(row?.received_date)}</span>
+                        <span className='text-sm text-gray-600 dark:text-gray-400'>{formatDate(row?.received_date)}</span>
                         <FiCheckCircle size={16} className='text-green-600' />
                     </div>:
                     <div className='grid py-2 space-y-1'>
@@ -90,18 +89,13 @@ const OutgoingDispatches = ({ dispatches }) => {
     return (
         <div className='w-full'>
             <div 
-                className='w-full p-4 flex justify-between items-center shadow-md cursor-pointer'
-                onClick={() => setShowOutgoing(!showOutgoing)}
+                className='w-full px-4 py-2 flex justify-between items-center shadow-md cursor-pointer'
             >
                 <div className='flex space-x-3'>
                     <span className='text-lg font-extralight'>Outgoing dispatches</span>
                 </div>
-            {
-                showOutgoing ? <RiArrowDropUpLine size={30} /> : <RiArrowDropDownLine size={30} /> 
-            }
-
             </div>
-            <div className={`${showOutgoing ? 'block' : 'hidden'} p-4`}>
+            <div className={`p-4`}>
             {
                 dispatches && dispatches.length > 0 ? 
                 <RecordsTable columns={columns} data={dispatches} /> :

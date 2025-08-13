@@ -7,6 +7,7 @@ import { TbLayoutDashboardFilled, TbVirusSearch } from 'react-icons/tb';
 import { HiBell, HiUser } from 'react-icons/hi';
 import { CiSettings } from 'react-icons/ci';
 import PasswordReset from '../settings/components/forms/PasswordReset';
+import { formatPagetitle } from '../../apis/functions';
 
 const Header = ({ toggleSidebar }) => {
 
@@ -14,11 +15,13 @@ const Header = ({ toggleSidebar }) => {
     const [resetPassword, setResetPassword] = useState(false);
 
     return (
-        <header className='sticky w-full top-0 z-30 h-[50px] py-2'>
+        <header className='sticky w-full top-0 z-30 h-[60px] py-2 bg-white dark:bg-gray-800'>
             <div className='flex flex-grow items-center justify-between p-2 md:px-3 2xl:px-11'>
                 <div className='flex items-center space-x-3'>   
                     <RxHamburgerMenu size={25} className='text-primary cursor-pointer' onClick={toggleSidebar} />
-                    <div className='text-xl font-bold hidden md:block md:pl-[180px] capitalize'>{}</div>
+                    <div className='text-2xl font-bold hidden md:block md:pl-[180px] capitalize'>
+                        <span className='px-4 font-extralight'>{formatPagetitle()}</span>
+                    </div>
                 </div>
                 <div className='flex items-center space-x-4 md:space-x-8'>
                     <div className='flex justify-end items-center text-gray-700 dark:text-gray-200 space-x-2 md:space-x-4 text-sm'>

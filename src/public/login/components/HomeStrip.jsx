@@ -49,7 +49,7 @@ const HomeStrip = () => {
                             item?.text.split("-")[1]
                         }
                         </span>
-                        <span className='text-6xl text-gray-800 dark:text-gray-200'>
+                        <span className='text-6xl text-gray-700 dark:text-gray-200 leading-tight'>
                         {
                             item?.text.split("-")[0]
                         }

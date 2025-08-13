@@ -15,6 +15,7 @@ const Dispatches = () => {
     const [fetching, setFetching] = useState(false);
     const [incoming, setIncoming] = useState();
     const [outgoing, setOutgoing] = useState();
+    const [showIncoming, setShowIncoming] = useState(true);
 
     if(dispatches?.status === "Token is Expired"){
         logout();
@@ -55,19 +56,34 @@ const Dispatches = () => {
     let icon = <AiOutlineSend size={20} />
 
     return (
-        <div className='w-full m-0 p-4'>
-            <div className='w-full flex justify-between items-center'>   
-                <PageTitle icon={icon} />
+        <div className='w-full m-0 px-4'>
+            <div className='w-full flex justify-between items-center px-2 pt-2 border-b-2 border-primary'>
+                <div className='flex items-center gap-2'>
+                    <button 
+                        className={`px-6 py-2 rounded-t-lg ${showIncoming ? 'bg-primary text-white hover:bg-hoverprimary cursor-not-allowed' : 'border-t border-x border-gray-300 dark:border-gray-700 dark:text-white text-primary'}`}
+                        onClick={() => setShowIncoming(true)}
+                    >
+                        Incoming
+                    </button>
+                    <button 
+                        className={`px-6 py-2 rounded-t-lg ${!showIncoming ? 'bg-primary text-white hover:bg-hoverprimary cursor-not-allowed' : 'border-t border-x border-gray-300 dark:border-gray-700 dark:text-white text-primary'}`}
+                        onClick={() => setShowIncoming(false)}
+                    >
+                        Outgoing
+                    </button>
+                </div>
                 <button 
-                    className='px-4 py-2 rounded-md bg-[#a8d13a] hover:bg-[#85a62a] text-black text-sm capitalize'
+                    className='px-4 py-2 rounded-md bg-primary hover:bg-hoverprimary text-white text-sm capitalize'
                     onClick={() => {}}
                 >
                     dispatch
                 </button>
             </div>
-            <div className='w-full mt-12 mb-4 grid space-y-6'>
-                { fetching || !incoming ? <LoadingBars /> : <IncomingDispatches dispatches={incoming} /> }
-                { fetching || !outgoing ? <LoadingBars /> : <OutgoingDispatches dispatches={outgoing} /> }
+            <div className='w-full mt-6 mb-4 grid'>
+                {
+                    !incoming || !outgoing ? <LoadingBars /> :
+                    (showIncoming ? <IncomingDispatches dispatches={incoming} /> : <OutgoingDispatches dispatches={outgoing} />)
+                }
             </div>
         </div>
     )

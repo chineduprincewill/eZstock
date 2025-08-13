@@ -12,7 +12,7 @@ module.exports = {
       },
       colors: {
         primary: '#a24901',
-        darkprimary: '#11204C',
+        hoverprimary: '#8f4101',
         selectedprimary: '#d96101',
         success: '#6a0761',
         successhover: '#4d1448',
