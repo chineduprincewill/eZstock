@@ -11,7 +11,7 @@ import { formatPagetitle } from '../../apis/functions';
 
 const Header = ({ toggleSidebar }) => {
 
-    const { user } = useContext(AppContext);
+    const { user, collapse } = useContext(AppContext);
     const [resetPassword, setResetPassword] = useState(false);
 
     return (
@@ -19,8 +19,8 @@ const Header = ({ toggleSidebar }) => {
             <div className='flex flex-grow items-center justify-between p-2 md:px-3 2xl:px-11'>
                 <div className='flex items-center space-x-3'>   
                     <RxHamburgerMenu size={25} className='text-primary cursor-pointer' onClick={toggleSidebar} />
-                    <div className='text-2xl font-bold hidden md:block md:pl-[180px] capitalize'>
-                        <span className='px-4 font-extralight'>{formatPagetitle()}</span>
+                    <div className={`text-2xl font-bold hidden md:block md:${!collapse && 'pl-[180px]'} capitalize`}>
+                        <span className={`${collapse && 'ml-6'} px-4 font-extralight`}>{formatPagetitle()}</span>
                     </div>
                 </div>
                 <div className='flex items-center space-x-4 md:space-x-8'>

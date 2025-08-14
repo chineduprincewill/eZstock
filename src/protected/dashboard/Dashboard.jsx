@@ -12,8 +12,7 @@ const Dashboard = () => {
     return (
         <div className='w-full m-0 p-4'>
             <div className='w-full flex items-center justify-between'>   
-                <PageTitle icon={icon} />
-               
+            {icon}
             </div>
             <div className='w-full mt-6 flex flex-wrap justify-between items-center'>
                 <div className="w-full md:w-[32%] mb-6 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-md border border-gray-300 dark:border-gray-700 px-2 py-1">

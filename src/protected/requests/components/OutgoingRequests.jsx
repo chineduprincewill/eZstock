@@ -53,7 +53,7 @@ const OutgoingRequests = () => {
             filterable: true,
             sortable: true,
             cell: (row) => (
-                <div className='grid py-2 space-y-1'>
+                <div className='grid py-2 space-y-1 text-gray-600 dark:text-gray-400'>
                     <span className='capitalize text-sm'>{user && JSON.parse(user)?.name === row?.requester_name ? 'me' : row?.requester_name}</span>
                     <span className='text-xs'>{row?.requester_email}</span>
                 </div>
@@ -65,7 +65,7 @@ const OutgoingRequests = () => {
             filterable: true,
             sortable: true,
             cell: (row) => (
-                <div className='grid py-2 space-y-1'>
+                <div className='grid py-2 space-y-1 text-gray-600 dark:text-gray-400'>
                     <span className='capitalize text-sm'>{user && JSON.parse(user)?.name === row?.approver_name ? 'me' : row?.approver_name}</span>
                     <span className='text-xs'>{row?.approver_email}</span>
                 </div>
@@ -77,7 +77,7 @@ const OutgoingRequests = () => {
             filterable: true,
             sortable: true,
             cell: (row) => (
-                <div className='grid py-2 space-y-1'>
+                <div className='grid py-2 space-y-1 text-gray-600 dark:text-gray-400'>
                     <span className='text-sm'>{row?.quantity} {row?.packtype} {row?.itemname}</span>
                     <span className='text-sm'>{row?.unit_quantity} pcs</span>
                 </div>
@@ -143,6 +143,13 @@ const OutgoingRequests = () => {
 
     return (
         <div className='w-full'>
+            <div 
+                className='w-full px-4 py-2 flex justify-between items-center shadow-md'
+            >
+                <div className='flex space-x-3'>
+                    <span className='text-lg font-extralight'>Incoming requests</span>
+                </div>
+            </div>
         {
             fetching ? <LoadingBars /> :
             requests && requests.length > 0 ? 

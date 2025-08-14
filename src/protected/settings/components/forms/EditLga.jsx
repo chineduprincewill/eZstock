@@ -59,7 +59,7 @@ const EditLga = ({ setEditLgaModal, lga }) => {
                                     required
                                 />
                                 <button
-                                    className={`w-full flex justify-center p-2 rounded-md bg-[#a8d13a] hover:bg-[#85a62a] text-black`}
+                                    className={`w-full flex justify-center p-2 rounded-md bg-primary hover:bg-hoverprimary text-white`}
                                 >
                                     {
                                         saving ? 

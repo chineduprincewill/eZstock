@@ -8,6 +8,7 @@ const AppContextProvider = (props) => {
     const [token, setToken] = useState(JSON.parse(localStorage.getItem('token')));
     const [theme, setTheme] = useState(localStorage.getItem("theme"));
     const [user, setUser] = useState(localStorage.getItem("user"));
+    const [collapse, setCollapse] = useState(false);
 
     const logout = () => {
         setToken('');
@@ -41,7 +42,9 @@ const AppContextProvider = (props) => {
                 record,
                 refreshRecord,
                 theme,
-                logout
+                logout,
+                collapse,
+                setCollapse
             }
         }>
             {props.children}

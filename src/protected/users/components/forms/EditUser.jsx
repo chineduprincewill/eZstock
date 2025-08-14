@@ -102,7 +102,7 @@ const EditUser = ({ setEditUserModal, user }) => {
                                 <FacilityOptions setFacility_id={setFacility_id} lga_id={lga_id} facility_id={facility_id} facility_name={user?.facility_name} />
                                 
                                 <button
-                                    className={`w-full flex justify-center p-2 rounded-md bg-[#a8d13a] hover:bg-[#85a62a] text-black`}
+                                    className={`w-full flex justify-center p-2 rounded-md bg-primary hover:bg-hoverprimary text-white`}
                                 >
                                     {
                                         updating ? 

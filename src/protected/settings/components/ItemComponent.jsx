@@ -5,6 +5,8 @@ import { deleteItemName, fetchItems } from '../../../apis/settingsActions';
 import LoadingBars from '../../../common/LoadingBars';
 import RecordsTable from '../../../common/RecordsTable';
 import EditItem from './forms/EditItem';
+import { HiOutlinePlus } from 'react-icons/hi';
+import NewItem from './forms/NewItem';
 
 const ItemComponent = () => {
 
@@ -17,6 +19,7 @@ const ItemComponent = () => {
     const [deleting, setDeleting] = useState();
     const [itemEditModal, setItemEditModal] = useState(false);
     const [itemobj, setItemobj] = useState();
+    const [createItemModal, setCreateItemModal] = useState(false);
 
     const columns = [
         {
@@ -25,7 +28,7 @@ const ItemComponent = () => {
             filterable: true,
             sortable: true,
             cell: (row) => (
-                <div>{row?.name}</div>
+                <div className='text-gray-600 dark:text-gray-400 text-sm'>{row?.name}</div>
             )
         },
         {
@@ -34,7 +37,7 @@ const ItemComponent = () => {
             filterable: true,
             sortable: true,
             cell: (row) => (
-                <div>{row?.category_name}</div>
+                <div className='text-gray-600 dark:text-gray-400 text-sm'>{row?.category_name}</div>
             )
         },
         {
@@ -59,7 +62,7 @@ const ItemComponent = () => {
                         :
                         <AiFillCheckCircle 
                             size={15} 
-                            className={`cursor-pointer text-[#54c5d0] ${(delete_id && delete_id === row?.name_id) && 'animate-spin'}`} 
+                            className={`cursor-pointer text-green-600 ${(delete_id && delete_id === row?.name_id) && 'animate-spin'}`} 
                             title='deactivate item'
                             onClick={() => itemDelete(row?.name_id, row?.status)}
                         />
@@ -100,10 +103,25 @@ const ItemComponent = () => {
     }, [record])
 
     return (
-        <div>
+        <div className='grid gap-1 p-4'>
+            <div className='flex justify-between items-center p-1 border-b border-gray-300 dark:border-gray-700'>
+                <span>Items</span>
+                <div 
+                    className='p-1 rounded-full bg-primary hover:bg-hoverprimary text-white shadow-lg'
+                    onClick={() => setCreateItemModal(true)}
+                >
+                    <HiOutlinePlus 
+                        size={20} 
+                        className='cursor-pointer' 
+                    />
+                </div>
+            </div>
         {
             fetching ? <LoadingBars />:
              (items && items.length > 0) && <RecordsTable columns={columns} data={items} />
+        }
+        {
+            createItemModal && <NewItem setCreateItemModal={setCreateItemModal} />
         }
         {
             itemEditModal && <EditItem setItemEditModal={setItemEditModal} item={itemobj} />

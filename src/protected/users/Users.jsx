@@ -31,9 +31,9 @@ const Users = () => {
             filterable: true,
             sortable: true,
             cell: (row) => (
-                <div className='grid py-2 space-y-1'>
+                <div className='grid py-2 space-y-1 text-gray-600 dark:text-gray-400'>
                     <span className='text-sm'>{row?.name}</span>
-                    <span className='text-xs text-[#54c5d0]'>{row?.email}</span>
+                    <span className='text-xs text-selectedprimary'>{row?.email}</span>
                 </div>
             )
         },
@@ -43,7 +43,7 @@ const Users = () => {
             filterable: true,
             sortable: true,
             cell: (row) => (
-                <div className='grid'>
+                <div className='grid text-gray-600 dark:text-gray-400'>
                     <span className='capitalize text-sm'>{row?.groupname} - {row?.role}</span>
                 </div>
             )
@@ -54,7 +54,7 @@ const Users = () => {
             filterable: true,
             sortable: true,
             cell: (row) => (
-                <div className='grid'>
+                <div className='grid text-gray-600 dark:text-gray-400'>
                     <span className='text-sm'>{row?.facility_name} {row?.lga_name} {row?.state_name}</span>
                 </div>
             )
@@ -90,7 +90,7 @@ const Users = () => {
                             :
                             <AiFillCheckCircle 
                                 size={15} 
-                                className={`cursor-pointer text-[#54c5d0] ${(delete_id && delete_id === row?.id) && 'animate-spin'}`} 
+                                className={`cursor-pointer text-green-500 ${(delete_id && delete_id === row?.id) && 'animate-spin'}`} 
                                 title='deactivate user'
                                 onClick={() => userDelete(row?.id, row?.status)}
                             />
@@ -139,11 +139,11 @@ const Users = () => {
     return (
         <div className='w-full m-0 p-4'>
             <div className='w-full flex items-center justify-between'>   
-                <PageTitle icon={icon} />
+                {icon}
                 {
                     user && JSON.parse(user)?.groupname === 'APIN' &&
                     <button 
-                        className='px-4 py-2 rounded-md bg-[#a8d13a] hover:bg-[#85a62a] text-black text-sm capitalize'
+                        className='px-4 py-2 rounded-md bg-primary hover:bg-hoverprimary text-white text-sm capitalize'
                         onClick={() => setCreateUserModal(true)}
                     >
                         new user

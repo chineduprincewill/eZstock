@@ -9,22 +9,33 @@ import NewRequest from './components/forms/NewRequest';
 const Requests = () => {
 
     const [createRequest, setCreateRequest] = useState(false);
-    const [showoutgoing, setShowoutgoing] = useState(false);
-
-    let icon = <LuGitPullRequest size={20} />
+    const [showincoming, setShowincoming] = useState(true);
 
     return (
-        <div className='w-full m-0 p-4'>
-            <div className='w-full flex justify-between items-center'>   
-                <PageTitle icon={icon} />
+        <div className='w-full m-0 px-4'>
+            <div className='w-full flex justify-between items-center px-2 pt-2 border-b-2 border-primary'>   
+            <div className='flex items-center gap-2'>
+                    <button 
+                        className={`px-6 py-2 rounded-t-lg ${showincoming ? 'bg-primary text-white hover:bg-hoverprimary cursor-not-allowed' : 'border-t border-x border-gray-300 dark:border-gray-700 dark:text-white text-primary'}`}
+                        onClick={() => setShowincoming(true)}
+                    >
+                        Incoming
+                    </button>
+                    <button 
+                        className={`px-6 py-2 rounded-t-lg ${!showincoming ? 'bg-primary text-white hover:bg-hoverprimary cursor-not-allowed' : 'border-t border-x border-gray-300 dark:border-gray-700 dark:text-white text-primary'}`}
+                        onClick={() => setShowincoming(false)}
+                    >
+                        Outgoing
+                    </button>
+                </div>
                 <button 
-                        className='px-4 py-2 rounded-md bg-[#a8d13a] hover:bg-[#85a62a] text-black text-sm capitalize'
+                        className='px-4 py-2 rounded-md bg-primary hover:bg-hoverprimary text-white text-sm capitalize'
                         onClick={() => setCreateRequest(true)}
                     >
-                        new request
+                        new
                     </button>
             </div>
-            <div className='w-full mt-8 mb-4 grid space-y-6'>
+            <div className='w-full mt-8 mb-4 hidden space-y-6'>
                 <IncomingRequests />
 
                 <div 
@@ -36,17 +47,22 @@ const Requests = () => {
                     >
                         <span className='text-lg font-extralight'>Outgoing requests</span>
                     {
-                        showoutgoing ? <RiArrowDropUpLine size={30} /> : <RiArrowDropDownLine size={30} /> 
+                        showincoming ? <RiArrowDropUpLine size={30} /> : <RiArrowDropDownLine size={30} /> 
                     }
 
                     </div>
-                    <div className={`${showoutgoing ? 'block' : 'hidden'} p-4`}>
+                    <div className={`${showincoming ? 'block' : 'hidden'} p-4`}>
                         <OutgoingRequests />
                     </div>
                 </div>
             </div>
+            <div className='w-full mt-6 mb-4 grid'>
             {
-                createRequest && <NewRequest setCreateRequest={setCreateRequest} setShowoutgoing={setShowoutgoing} />
+                showincoming ? <IncomingRequests /> : <OutgoingRequests />
+            }
+            </div>
+            {
+                createRequest && <NewRequest setCreateRequest={setCreateRequest} setShowincoming={setShowincoming} />
             }
         </div>
     )

@@ -5,6 +5,8 @@ import { deleteFacility, fetchAllFacilities } from '../../../apis/settingsAction
 import LoadingBars from '../../../common/LoadingBars';
 import RecordsTable from '../../../common/RecordsTable';
 import EditFacility from './forms/EditFacility';
+import { HiOutlinePlus } from 'react-icons/hi';
+import NewFacility from './forms/NewFacility';
 
 const FacilitiesComponent = () => {
 
@@ -17,6 +19,7 @@ const FacilitiesComponent = () => {
     const [delete_id, setDelete_id] = useState();
     const [success, setSuccess] = useState();
     const [deleting, setDeleting] = useState();
+    const [createFacilityModal, setCreateFacilityModal] = useState(false);
 
     const columns = [
         {
@@ -25,7 +28,9 @@ const FacilitiesComponent = () => {
             filterable: true,
             sortable: true,
             cell: (row) => (
-                <div>{row?.facility_name}</div>
+                <div className='grid gap-1'>
+                    <div className='text-gray-600 dark:text-gray-400 text-sm'>{row?.facility_name}</div>
+                </div>
             )
         },
         {
@@ -34,7 +39,7 @@ const FacilitiesComponent = () => {
             filterable: true,
             sortable: true,
             cell: (row) => (
-                <div>{row?.lga_name}</div>
+                <div className='text-gray-600 dark:text-gray-400 text-sm'>{row?.lga_name}</div>
             )
         },
         {
@@ -43,7 +48,7 @@ const FacilitiesComponent = () => {
             filterable: true,
             sortable: true,
             cell: (row) => (
-                <div>{row?.state_name}</div>
+                <div className='text-gray-600 dark:text-gray-400 text-sm'>{row?.state_name}</div>
             )
         },
         {
@@ -68,7 +73,7 @@ const FacilitiesComponent = () => {
                         :
                         <AiFillCheckCircle 
                             size={15} 
-                            className={`cursor-pointer text-[#54c5d0] ${(delete_id && delete_id === row?.facility_id) && 'animate-spin'}`} 
+                            className={`cursor-pointer text-green-600 ${(delete_id && delete_id === row?.facility_id) && 'animate-spin'}`} 
                             title='deactivate facility'
                             onClick={() => facilityDelete(row?.facility_id, row?.status)}
                         />
@@ -105,10 +110,25 @@ const FacilitiesComponent = () => {
     }, [record])
 
     return (
-        <div className='w-full'>
+        <div className='w-full grid gap-1 p-4'>
+            <div className='flex justify-between items-center p-1 border-b border-gray-300 dark:border-gray-700'>
+                <span>Facilities</span>
+                <div 
+                    className='p-1 rounded-full bg-primary hover:bg-hoverprimary text-white shadow-lg'
+                    onClick={() => setCreateFacilityModal(true)}
+                >
+                    <HiOutlinePlus 
+                        size={20} 
+                        className='cursor-pointer' 
+                    />
+                </div>
+            </div>
         {
             fetching ? <LoadingBars />:
              (facilities && facilities.length > 0) && <RecordsTable columns={columns} data={facilities} />
+        }
+        {
+            createFacilityModal && <NewFacility setCreateFacilityModal={setCreateFacilityModal} />
         }
         {
             facilityEditmodal && <EditFacility setFacilityEditModal={setFacilityEditModal} facility={facility} />

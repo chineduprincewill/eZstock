@@ -182,8 +182,8 @@ const Warehouse = () => {
     let icon = <PiWarehouse size={20} />
     return (
         <div className='w-full m-0 p-4'>
-            <div className='w-full flex justify-between items-center'>   
-                <PageTitle icon={icon} />
+            <div className='w-full flex justify-between items-center mb-8'>   
+                {icon}
                 {
                     user && JSON.parse(user)?.groupname === 'APIN' &&
                     <button 

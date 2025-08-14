@@ -168,7 +168,7 @@ const NewRequest = ({ setCreateRequest, setShowoutgoing }) => {
                                     required
                                 />
                                 <button
-                                    className={`w-full md:w-[200px] flex justify-center p-2.5 rounded-md bg-[#a8d13a] hover:bg-[#85a62a] text-black`}
+                                    className={`w-full md:w-[200px] flex justify-center p-2.5 rounded-md bg-primary hover:bg-hoverprimary text-white`}
                                 >
                                     <AiOutlinePlus size={20} />
                                 </button>

@@ -6,6 +6,7 @@ import { AiFillCheckCircle, AiFillCloseCircle, AiOutlineEdit } from 'react-icons
 import RecordsTable from '../../../common/RecordsTable';
 import NewState from './forms/NewState';
 import EditState from './forms/EditState';
+import { HiOutlinePlus } from 'react-icons/hi';
 
 const StatesComponent = () => {
 
@@ -18,6 +19,7 @@ const StatesComponent = () => {
     const [delete_id, setDelete_id] = useState();
     const [success, setSuccess] = useState();
     const [deleting, setDeleting] = useState();
+    const [createmodal, setCreatemodal] = useState(false);
 
     const columns = [
         {
@@ -26,7 +28,7 @@ const StatesComponent = () => {
             filterable: true,
             sortable: true,
             cell: (row) => (
-                <div>{row?.state_name}</div>
+                <div className='text-gray-600 dark:text-gray-400 text-sm'>{row?.state_name}</div>
             )
         },
         {
@@ -51,7 +53,7 @@ const StatesComponent = () => {
                         :
                         <AiFillCheckCircle 
                             size={15} 
-                            className={`cursor-pointer text-[#54c5d0] ${(delete_id && delete_id === row?.state_id) && 'animate-spin'}`} 
+                            className={`cursor-pointer text-green-600 ${(delete_id && delete_id === row?.state_id) && 'animate-spin'}`} 
                             title='deactivate state'
                             onClick={() => stateDelete(row?.state_id, row?.status)}
                         />
@@ -89,10 +91,25 @@ const StatesComponent = () => {
     }, [record])
 
     return (
-        <div className='w-full'>
+        <div className='w-full grid gap-1 p-4'>
+            <div className='flex justify-between items-center p-1 border-b border-gray-300 dark:border-gray-700'>
+                <span>State</span>
+                <div 
+                    className='p-1 rounded-full bg-primary hover:bg-hoverprimary text-white shadow-lg'
+                    onClick={() => setCreatemodal(true)}
+                >
+                    <HiOutlinePlus 
+                        size={20} 
+                        className='cursor-pointer' 
+                    />
+                </div>
+            </div>
         {
             fetching ? <LoadingBars />:
              states?.states.length > 0 && <RecordsTable columns={columns} data={states?.states} />
+        }
+        {
+            createmodal && <NewState setCreatemodal={setCreatemodal} />
         }
         {
             editmodal && <EditState setEditmodal={setEditmodal} state={state} />

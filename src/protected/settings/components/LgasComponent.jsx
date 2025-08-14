@@ -5,6 +5,8 @@ import { deleteLga, fetchAllLgas } from '../../../apis/settingsActions';
 import LoadingBars from '../../../common/LoadingBars';
 import RecordsTable from '../../../common/RecordsTable';
 import EditLga from './forms/EditLga';
+import { HiOutlinePlus } from 'react-icons/hi';
+import NewLga from './forms/NewLga';
 
 const LgasComponent = () => {
 
@@ -17,6 +19,7 @@ const LgasComponent = () => {
     const [delete_id, setDelete_id] = useState();
     const [success, setSuccess] = useState();
     const [deleting, setDeleting] = useState();
+    const [createLgaModal, setCreateLgaModal] = useState(false);
 
     const columns = [
         {
@@ -25,7 +28,7 @@ const LgasComponent = () => {
             filterable: true,
             sortable: true,
             cell: (row) => (
-                <div>{row?.lga_name}</div>
+                <div className='text-gray-600 dark:text-gray-400 text-sm'>{row?.lga_name}</div>
             )
         },
         {
@@ -34,7 +37,7 @@ const LgasComponent = () => {
             filterable: true,
             sortable: true,
             cell: (row) => (
-                <div>{row?.state_name}</div>
+                <div className='text-gray-600 dark:text-gray-400 text-sm'>{row?.state_name}</div>
             )
         },
         {
@@ -59,7 +62,7 @@ const LgasComponent = () => {
                         :
                         <AiFillCheckCircle 
                             size={15} 
-                            className={`cursor-pointer text-[#54c5d0] ${(delete_id && delete_id === row?.lga_id) && 'animate-spin'}`} 
+                            className={`cursor-pointer text-green-600 ${(delete_id && delete_id === row?.lga_id) && 'animate-spin'}`} 
                             title='deactivate LGA'
                             onClick={() => lgaDelete(row?.lga_id, row?.status)}
                         />
@@ -96,10 +99,25 @@ const LgasComponent = () => {
     }, [record])
 
     return (
-        <div className='w-full'>
+        <div className='w-full grid gap-1 p-4'>
+            <div className='flex justify-between items-center p-1 border-b border-gray-300 dark:border-gray-700'>
+                <span>Local Government Area</span>
+                <div 
+                    className='p-1 rounded-full bg-primary hover:bg-hoverprimary text-white shadow-lg'
+                    onClick={() => setCreateLgaModal(true)}
+                >
+                    <HiOutlinePlus 
+                        size={20} 
+                        className='cursor-pointer' 
+                    />
+                </div>
+            </div>
         {
             fetching ? <LoadingBars />:
              (lgas && lgas.length > 0) && <RecordsTable columns={columns} data={lgas} />
+        }
+        {
+            createLgaModal && <NewLga setCreateLgaModal={setCreateLgaModal} />
         }
         {
             lgaEditmodal && <EditLga setEditLgaModal={setEditLgaModal} lga={lga} />

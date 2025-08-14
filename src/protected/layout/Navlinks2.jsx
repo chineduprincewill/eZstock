@@ -6,7 +6,7 @@ import { PiWarehouse } from 'react-icons/pi';
 import { LuGitPullRequest } from 'react-icons/lu';
 import { AppContext } from '../../context/AppContext';
 
-const Navlinks2 = () => {
+const Navlinks2 = ({ collapse, navOpen }) => {
 
     const locatn = useLocation();
     const { user } = useContext(AppContext);
@@ -92,9 +92,9 @@ const Navlinks2 = () => {
                 (navlinks !== null) && navlinks.map(nav => {
                     return (
                         <li key={nav.id} className={`px-3 py-1.5 cursor-pointer hover:bg-selectedprimary ${nav.url === locatn.pathname && 'bg-selectedprimary'}`}>
-                            <Link to={nav.url} key={nav.id} className='flex justify-start items-center space-x-3 my-1'>
+                            <Link to={nav.url} key={nav.id} className={`flex justify-start items-center ${!collapse && 'space-x-3'} my-1`}>
                                 {nav.icon}
-                                <span>{nav.title}</span>
+                                <span className={`${collapse && !navOpen ? 'hidden' : 'block'}`}>{nav.title}</span>
                             </Link>
                         </li>
                     )

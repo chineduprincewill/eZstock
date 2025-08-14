@@ -6,7 +6,7 @@ import { AppContext } from '../../context/AppContext'
 
 const DefaultLayout = () => {
 
-    const { theme } = useContext(AppContext);
+    const { theme, collapse } = useContext(AppContext);
     const [navOpen, setNavOpen] = useState(false);
 
     const toggleSidebar = () => {
@@ -19,7 +19,7 @@ const DefaultLayout = () => {
             <div className="relative flex flex-1 flex-col overflow-y-auto overflow-x-hidden">
                 <Header toggleSidebar={toggleSidebar} />
                 <main>
-                    <div className="ml-0 md:ml-[230px] max-w-screen-2xl p-0">
+                    <div className={`${collapse ? 'ml-0 md:ml-[75px] max-w-screen-2xl p-0' : 'ml-0 md:ml-[230px] max-w-screen-2xl p-0'}`}>
                         <Outlet />
                     </div>
                 </main>

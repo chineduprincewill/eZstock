@@ -1,9 +1,10 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { AppContext } from '../../../context/AppContext'
-import { HiTrash } from 'react-icons/hi';
+import { HiOutlinePlus, HiTrash } from 'react-icons/hi';
 import { deletePacksize, fetchAllPacksizes } from '../../../apis/settingsActions';
 import LoadingBars from '../../../common/LoadingBars';
 import RecordsTable from '../../../common/RecordsTable';
+import NewPacksize from './forms/NewPacksize';
 
 const PacksizesComponent = () => {
 
@@ -14,6 +15,7 @@ const PacksizesComponent = () => {
     const [success, setSuccess] = useState();
     const [deleting, setDeleting] = useState(false);
     const [delete_id, setDelete_id] = useState();
+    const [createPacksizeModal, setCreatePacksizeModal] = useState(false);
 
     const columns = [
         {
@@ -22,7 +24,7 @@ const PacksizesComponent = () => {
             filterable: true,
             sortable: true,
             cell: (row) => (
-                <div>{row?.packname}</div>
+                <div className='text-gray-600 dark:text-gray-400 text-sm'>{row?.packname}</div>
             )
         },
         {
@@ -31,7 +33,7 @@ const PacksizesComponent = () => {
             filterable: true,
             sortable: true,
             cell: (row) => (
-                <div>{row?.name}</div>
+                <div className='text-gray-600 dark:text-gray-400 text-sm'>{row?.name}</div>
             )
         },
         {
@@ -40,7 +42,7 @@ const PacksizesComponent = () => {
             filterable: true,
             sortable: true,
             cell: (row) => (
-                <div>{row?.quantity_per_pack}</div>
+                <div className='text-gray-600 dark:text-gray-400 text-sm'>{row?.quantity_per_pack}</div>
             )
         },
         {
@@ -84,10 +86,26 @@ const PacksizesComponent = () => {
     }, [record])
     
     return (
-        <div className='w-full'>
+        <div className='w-full grid gap-1 p-4'>
+            <div className='flex justify-between items-center p-1 border-b border-gray-300 dark:border-gray-700'>
+                <span>Pack sizes</span>
+                <div 
+                    className='p-1 rounded-full bg-primary hover:bg-hoverprimary text-white shadow-lg'
+                    onClick={() => setCreatePacksizeModal(true)}
+                >
+                    <HiOutlinePlus 
+                        size={20} 
+                        className='cursor-pointer' 
+                    />
+                </div>
+            </div>
         {
             fetching ? <LoadingBars />:
             packsizes && <RecordsTable columns={columns} data={packsizes} />
+        }
+        
+        {
+            createPacksizeModal && <NewPacksize setCreatePacksizeModal={setCreatePacksizeModal} />
         }
         </div>
     )
